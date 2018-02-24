@@ -1,0 +1,40 @@
+h1,
+h2,
+h3,
+h4 {
+    text-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.crystal {
+    max-height: 10rem;
+    background-color: lightblue;
+    border-radius: 10%;
+    margin: 0 2rem 2rem 0;
+    -webkit-transition: max-height .5s, box-shadow .5s;
+    /* Safari */
+    transition: max-height .5s, box-shadow .5s;
+    transition-timing-function: ease-in-out;
+}
+
+.crystal:hover {
+    max-height: 11rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+body {
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+main {
+    color: white;
+}
+
+.jumbotron {
+    opacity: .8;
+}
+
+#new-game {
+    font-size: 2rem;
+}

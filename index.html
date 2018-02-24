@@ -6,145 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script defer src="assets/javascript/game.js"></script>
+
+
+
 </head>
 
 <body>
-    <p>Random Number: <span id="random-number"></span></p>
-    <p>Crystal Power: <span id="crystals-count"></span></p>
-    <p>Game Wins: <span id="wins"> </span></p>
-    <p>Game Losses: <span id="losses"> </span></p>
-    <div id="crystals">
-        <button value="0" id="crystal-one" class="btn btn-info">CHRYSTAL ONE</button>
-        <button value="0" id="crystal-two" class="btn btn-info">CHRYSTAL TWO</button>
-        <button value="0" id="crystal-three" class="btn btn-info">CHRYSTAL THREE</button>
-        <button value="0" id="crystal-four" class="btn btn-info">CHRYSTAL FOUR</button>
-    </div>
-    <button value="0" id="new-game" class="btn btn-info">NEW GAME</button>
-    <p id="playthrough"></p>
 
+    <main class="text-center container">
+        <div class="jumbotron jumbotron-fluid bg-primary">
+            <div class="container">
+                <h1 class="display-4">Unlock the Power of the Magic Crystals</h1>
+                <p class="lead">You've stumbled upon a cave full of treasures, where the legendary magic crystals hide. To unlock the power of the crystals, you must combine their power to match the magic number. Each crystal has a unique hidden strength. Becareful!
+                    These crystals are dangerous. Should their combined power exceed the magic number, a curse will cast upon you. Click any crystals to begin!</p>
+            </div>
+        </div>
+        <div class="mb-3">
+            <span class="p-3 bg-primary text-white">Magic Number: <span id="random-number"></span></span>
+            <span class="p-3  bg-primary text-white">Combined Crystal Power: <span id="crystals-count"></span></span>
+        </div>
+        <p class="badge badge-pill badge-success">Crystal Power Wins: <span id="wins"> </span></p>
+        <p class="badge badge-pill badge-danger">Crystal Curse Losses: <span id="losses"> </span></p>
+        <div id="crystals ">
+            <img value="0" src="assets/images/crystal-1.png" id="crystal-one " class="btn crystal">
+            <img value="0" src="assets/images/crystal-2.png" id="crystal-two " class="btn crystal">
+            <img value="0" src="assets/images/crystal-3.png" id="crystal-three " class="btn crystal">
+            <img value="0" src="assets/images/crystal-4.png" id="crystal-four " class="btn crystal">
+        </div>
+        <button id="new-game" class="btn btn-primary">NEW GAME</button>
+        <h3 id="playthrough "></h3>
+        <audio id="win-sound">
+                <source src="assets/sounds/win.wav" type="audio/wav">
+                Your browser does not support the audio element.
+              </audio>
+        <audio id="lose-sound">
+                    <source src="assets/sounds/lose.wav" type="audio/wav">
+                    Your browser does not support the audio element.
+                  </audio>
+    </main>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-    let game = {
-        gameNumber: 0,
-        crystalCount: 0,
-        wins: 0,
-        losses: 0,
 
 
-
-
-
-
-
-        init: function() {
-
-
-            //Set main number between 19 - 120
-            this.gameNumber = Math.floor(Math.random() * (120 - 19 + 1) + 19);
-            $("#random-number").text(this.gameNumber);
-
-            this.crystalCount = 0;
-
-            //Set crystal value numbers between 1 - 12
-            $("#crystals button").each(function() {
-
-                $(this).attr("value", Math.floor(Math.random() * (12 - 1 + 1) + 1))
-
-            })
-
-
-
-        },
-
-        newGame: function() {
-
-
-
-            this.wins = 0;
-            this.losses = 0;
-            $("#random-number, #playthrough, #wins, #losses, #crystals-count").empty();
-
-            this.init();
-
-
-        },
-
-
-        gameWin: function() {
-            if (this.gameNumber === this.crystalCount && this.isGameOver === false) {
-                $("#playthrough").text("Great, you win!")
-
-                this.wins++;
-                $("#wins").text(this.wins);
-                this.init();
-
-            }
-
-
-
-        },
-
-        isGameOver: function() {
-
-            if (this.crystalCount > this.gameNumber) {
-
-                return true;
-            } else {
-                return false;
-            }
-        },
-        gameLose: function() {
-
-            if (this.isGameOver() === true) {
-
-                this.losses++
-
-                    $("#losses").text(this.losses);
-                $("#playthrough").text("Sorry, you lost the last round!");
-                game.init();
-
-            }
-
-        }
-
-
-
-
-
-    }
-
-    game.init();
-
-    $("#crystals button").on("click", function() {
-
-
-
-        if (game.isGameOver() === false) {
-            //clear playthrough message
-
-            game.crystalCount = game.crystalCount + parseInt($(this).attr("value"))
-
-            //add crystal to crystalsAdded
-            game.crystalsAdded = game.gameNumber + parseInt($(this).attr("value"))
-
-            //get the main number and add it to the current value
-
-            //add the current value to the crystals number
-
-            //display crystals added
-            $("#crystals-count").text(game.crystalCount);
-        }
-        game.gameWin();
-        game.gameLose();
-
-
-    });
-
-    $("#new-game").on("click", function() {
-
-        game.newGame();
-    });
-</script>
 
 </html>
