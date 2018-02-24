@@ -11,13 +11,15 @@
 <body>
     <p>Random Number: <span id="random-number"></span></p>
     <p>Crystal Power: <span id="crystals-count"></span></p>
-    <p>Game Wins: <span id="wins"></span></p>
+    <p>Game Wins: <span id="wins"> </span></p>
+    <p>Game Losses: <span id="losses"> </span></p>
     <div id="crystals">
         <button value="0" id="crystal-one" class="btn btn-info">CHRYSTAL ONE</button>
         <button value="0" id="crystal-two" class="btn btn-info">CHRYSTAL TWO</button>
         <button value="0" id="crystal-three" class="btn btn-info">CHRYSTAL THREE</button>
         <button value="0" id="crystal-four" class="btn btn-info">CHRYSTAL FOUR</button>
     </div>
+    <button value="0" id="new-game" class="btn btn-info">NEW GAME</button>
     <p id="playthrough"></p>
 
 </body>
@@ -27,6 +29,7 @@
         gameNumber: 0,
         crystalCount: 0,
         wins: 0,
+        losses: 0,
 
 
 
@@ -54,13 +57,26 @@
 
         },
 
+        newGame: function() {
+
+
+
+            this.wins = 0;
+            this.losses = 0;
+            $("#random-number, #playthrough, #wins, #losses, #crystals-count").empty();
+
+            this.init();
+
+
+        },
+
 
         gameWin: function() {
             if (this.gameNumber === this.crystalCount && this.isGameOver === false) {
                 $("#playthrough").text("Great, you win!")
 
                 this.wins++;
-                $("#wins").text(wins);
+                $("#wins").text(this.wins);
                 this.init();
 
             }
@@ -82,7 +98,10 @@
 
             if (this.isGameOver() === true) {
 
-                $("#playthrough").text("Sorry, you lost the last round!")
+                this.losses++
+
+                    $("#losses").text(this.losses);
+                $("#playthrough").text("Sorry, you lost the last round!");
                 game.init();
 
             }
@@ -120,6 +139,11 @@
         game.gameLose();
 
 
+    });
+
+    $("#new-game").on("click", function() {
+
+        game.newGame();
     });
 </script>
 
