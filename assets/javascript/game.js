@@ -11,9 +11,9 @@ let game = {
 
     //Loss count
     losses: 0,
-    crystalPowers: ["The crystal grant you the power of avoiding!", "You can now teleport. That's gonna come in handy during rush hour.", "You once again have 20/20 vision", "You have double your lifetime!", "Your 401k benefits are now 50%!", "You can now hear the thoughts of anyone within close proximity."],
+    crystalPowers: ["House chores will be magically done with a snap of a finger.", "You can now teleport. That's gonna come in handy during rush hour.", "You once again have 20/20 vision.", "You have double your lifetime!", "Your 401k benefits are now a 50% match!", "You can now hear the thoughts of anyone within close proximity."],
 
-    crystalCurses: ["Taxes will have to be done twice a year, followed by an IRS audit every 2 years.", "You have aged 10 years!", "Rush hour traffic will be doubled every day!", "Your mortgage has tripled!", "Traveling salesmen will knock on your door every weekend morning!"],
+    crystalCurses: ["Taxes will have to be done twice a year, followed by an IRS audit every 2 years.", "You have aged 10 years!", "Rush hour traffic will be doubled every day!", "Your mortgage has tripled!", "Traveling salesmen will knock on your door every weekend morning!", "You'll be gassy every day."],
 
 
     //Initializes gameplay
@@ -64,7 +64,7 @@ let game = {
     gameWin: function() {
         if (this.gameNumber === this.crystalCount && this.isGameOver() === false) {
             // $("#playthrough").text("Great, you win!")
-            this.modalDialog("Awesome", "You've has bestowed on you the following: " + this.crystalCurses[Math.floor(Math.random() * this.crystalCurses.length)]);
+            this.modalDialog("Awesome", "The crystals have bestowed upon you the following: " + this.crystalPowers[Math.floor(Math.random() * this.crystalCurses.length)]);
 
             this.wins++;
             $("#wins").text(this.wins);
