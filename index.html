@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Random Number: <span id="random-number"></span></p>
+    <p>Crystal Power: <span id="crystals-count"></span></p>
+    <p>Game Wins: <span id="wins"></span></p>
+    <div id="crystals">
+        <button value="0" id="crystal-one" class="btn btn-info">CHRYSTAL ONE</button>
+        <button value="0" id="crystal-two" class="btn btn-info">CHRYSTAL TWO</button>
+        <button value="0" id="crystal-three" class="btn btn-info">CHRYSTAL THREE</button>
+        <button value="0" id="crystal-four" class="btn btn-info">CHRYSTAL FOUR</button>
+    </div>
+    <p id="playthrough"></p>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    let game = {
+        gameNumber: 0,
+        crystalCount: 0,
+        wins: 0,
+
+
+
+
+
+
+
+        init: function() {
+
+
+            //Set main number between 19 - 120
+            this.gameNumber = Math.floor(Math.random() * (120 - 19 + 1) + 19);
+            $("#random-number").text(this.gameNumber);
+
+            this.crystalCount = 0;
+
+            //Set crystal value numbers between 1 - 12
+            $("#crystals button").each(function() {
+
+                $(this).attr("value", Math.floor(Math.random() * (12 - 1 + 1) + 1))
+
+            })
+
+
+
+        },
+
+
+        gameWin: function() {
+            if (this.gameNumber === this.crystalCount && this.isGameOver === false) {
+                $("#playthrough").text("Great, you win!")
+
+                this.wins++;
+                $("#wins").text(wins);
+                this.init();
+
+            }
+
+
+
+        },
+
+        isGameOver: function() {
+
+            if (this.crystalCount > this.gameNumber) {
+
+                return true;
+            } else {
+                return false;
+            }
+        },
+        gameLose: function() {
+
+            if (this.isGameOver() === true) {
+
+                $("#playthrough").text("Sorry, you lost the last round!")
+                game.init();
+
+            }
+
+        }
+
+
+
+
+
+    }
+
+    game.init();
+
+    $("#crystals button").on("click", function() {
+
+
+
+        if (game.isGameOver() === false) {
+            //clear playthrough message
+
+            game.crystalCount = game.crystalCount + parseInt($(this).attr("value"))
+
+            //add crystal to crystalsAdded
+            game.crystalsAdded = game.gameNumber + parseInt($(this).attr("value"))
+
+            //get the main number and add it to the current value
+
+            //add the current value to the crystals number
+
+            //display crystals added
+            $("#crystals-count").text(game.crystalCount);
+        }
+        game.gameWin();
+        game.gameLose();
+
+
+    });
+</script>
+
+</html>
